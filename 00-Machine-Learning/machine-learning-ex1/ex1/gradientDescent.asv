@@ -20,8 +20,8 @@ for iter = 1:num_iters
     % Save the cost J in every iteration    
     J_history(iter) = computeCost(X, y, theta);
 
-    % theta_j <-- theta_j - alpha * d/dtheta_j J(theta)
-    theta = theta - (alpha * (1/m) * sum(((theta' * X')' - y) .* X))';
+    % theta <- t
+    theta = theta - alpha * (1/m) * sum(((theta' * X')' - y).*X);
 end
 
 end
