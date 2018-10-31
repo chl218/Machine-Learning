@@ -42,7 +42,7 @@ Theta2_grad = zeros(size(Theta2));
 
 X = [ones(m, 1) X];
 
-Y = eye(num_labels);
+Y = diag(10);
 
 for i = 1:m
     a1 = X(i, :);
@@ -50,14 +50,13 @@ for i = 1:m
     z2 = Theta1 * a1';
     a2 = [1; sigmoid(z2)];
     
-    z3 = Theta2 * a2;
+    z3 = Theta2 * a2';
     a3 = sigmoid(z3);
    
-    yk = Y(y(i), :);
-    J = J + yk*log(a3) + (1-yk)*log(1 - a3);
+    Y(y(i), :) * log(a3) + (1-Y(y(i)
 end
 
-J = (-1/m)*J;
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
