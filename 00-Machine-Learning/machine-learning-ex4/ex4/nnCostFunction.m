@@ -57,7 +57,12 @@ for i = 1:m
     J = J + yk*log(a3) + (1-yk)*log(1 - a3);
 end
 
-J = (-1/m)*J;
+t1Reg = sum(sum(Theta1(:, 2:end) .* Theta1(:, 2:end)));
+t2Reg = sum(sum(Theta2(:, 2:end) .* Theta2(:, 2:end)));
+J = (-1/m)*J + (lambda/(2*m))*(t1Reg + t2Reg);
+
+
+
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
