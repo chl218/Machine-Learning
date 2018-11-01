@@ -45,9 +45,9 @@ X = [ones(m, 1) X];
 Y = eye(num_labels);
 
 for i = 1:m
-    a1 = X(i, :);
+    a1 = X(i, :)';
     
-    z2 = Theta1 * a1';
+    z2 = Theta1 * a1;
     a2 = [1; sigmoid(z2)];
     
     z3 = Theta2 * a2;
@@ -60,8 +60,6 @@ end
 t1Reg = sum(sum(Theta1(:, 2:end) .* Theta1(:, 2:end)));
 t2Reg = sum(sum(Theta2(:, 2:end) .* Theta2(:, 2:end)));
 J = (-1/m)*J + (lambda/(2*m))*(t1Reg + t2Reg);
-
-
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
@@ -78,6 +76,33 @@ J = (-1/m)*J + (lambda/(2*m))*(t1Reg + t2Reg);
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+
+fprintf('Theta1_grad dim: %dx%d\n', size(Theta1_grad));
+fprintf('Theta2_grad dim: %dx%d\n', size(Theta2_grad));
+
+for t=1:m
+    
+    % Step 1: Feedforward
+    a1 = X(t, :)';
+    z2 = Theta1 * a1;
+    a2 = [1; sigmoid(z2)];
+    z3 = Theta2 * a2;
+    a3 = sigmoid(z3);
+
+    % Step 2: Compute error terms
+    delta3 = a3 - Y(y(t), :)';
+    % Step 3: Compute error terms
+    delta2 = (Theta2(:, 2:end)' * delta3) .* sigmoidGradient(z2);
+
+    % Step 4: Accumulate gradients
+    Theta1_grad =  Theta1_grad + delta2*a1';
+    Theta2_grad =  Theta2_grad + delta3*a2'; 
+end
+ 
+% Step 5
+Theta1_grad = (1/m)*Theta1_grad;
+Theta2_grad = (1/m)*Theta2_grad;
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for

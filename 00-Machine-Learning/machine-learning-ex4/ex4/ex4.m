@@ -111,8 +111,8 @@ fprintf('Program paused. Press enter to continue.\n');
 
 fprintf('\nEvaluating sigmoid gradient...\n')
 
-g = sigmoidGradient([-1 -0.5 0 0.5 1]);
-fprintf('Sigmoid gradient evaluated at [-1 -0.5 0 0.5 1]:\n  ');
+g = sigmoidGradient([-10 -0.5 0 0.5 10]);
+fprintf('Sigmoid gradient evaluated at [-10 -0.5 0 0.5 10]:\n  ');
 fprintf('%f ', g);
 fprintf('\n\n');
 
