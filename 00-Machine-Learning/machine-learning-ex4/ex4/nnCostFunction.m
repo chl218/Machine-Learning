@@ -77,8 +77,8 @@ J = (-1/m)*J + (lambda/(2*m))*(t1Reg + t2Reg);
 %               first time.
 %
 
-fprintf('Theta1_grad dim: %dx%d\n', size(Theta1_grad));
-fprintf('Theta2_grad dim: %dx%d\n', size(Theta2_grad));
+% fprintf('Theta1_grad dim: %dx%d\n', size(Theta1_grad));
+% fprintf('Theta2_grad dim: %dx%d\n', size(Theta2_grad));
 
 for t=1:m
     
@@ -92,8 +92,10 @@ for t=1:m
     % Step 2: Compute error terms
     delta3 = a3 - Y(y(t), :)';
     % Step 3: Compute error terms
-    delta2 = (Theta2(:, 2:end)' * delta3) .* sigmoidGradient(z2);
+%     delta2 = (Theta2(:, 2:end)' * delta3) .* sigmoidGradient(z2);
 
+    gz = a2(2:end);
+    delta2 = (Theta2(:, 2:end)' * delta3) .* (gz.*(1-gz)); % optimized
     % Step 4: Accumulate gradients
     Theta1_grad =  Theta1_grad + delta2*a1';
     Theta2_grad =  Theta2_grad + delta3*a2'; 
@@ -111,6 +113,10 @@ Theta2_grad = (1/m)*Theta2_grad;
 %               and Theta2_grad from Part 2.
 %
 % -------------------------------------------------------------
+
+
+Theta1_grad(:, 2:end) = Theta1_grad(:, 2:end) + (lambda/m)*Theta1(:, 2:end);
+Theta2_grad(:, 2:end) = Theta2_grad(:, 2:end) + (lambda/m)*Theta2(:, 2:end);
 
 % =========================================================================
 
