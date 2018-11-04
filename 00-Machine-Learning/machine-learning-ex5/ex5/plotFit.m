@@ -1,4 +1,4 @@
-function plotFit(min_x, max_x, mu, sigma, theta, p)
+ function plotFit(min_x, max_x, mu, sigma, theta, p)
 %PLOTFIT Plots a learned polynomial regression fit over an existing figure.
 %Also works with linear regression.
 %   PLOTFIT(min_x, max_x, mu, sigma, theta, p) plots the learned polynomial
