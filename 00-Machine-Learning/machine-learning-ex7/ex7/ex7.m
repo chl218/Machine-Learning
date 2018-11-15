@@ -83,8 +83,7 @@ max_iters = 10;
 
 % For consistency, here we set centroids to specific values
 % but in practice you want to generate them automatically, such as by
-% settings them to be random examples (as can be seen in
-% kMeansInitCentroids).
+% settings them to be random examples (as can be seen in kMeansInitCentroids).
 initial_centroids = [3 3; 6 2; 8 5];
 
 % Run K-Means algorithm. The 'true' at the end tells our function to plot
