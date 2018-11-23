@@ -26,14 +26,14 @@ for epsilon = min(pval):stepsize:max(pval)
 
     pred = pval < epsilon;
     
-    tp = sum(pred==1 & yval==1);
+    tp = sum(yval);
     fp = sum(pred==1 & yval==0);
-    fn = sum(pred==0 & yval==1);
-    
-    prec = tp/(tp+fp);
-    reca = tp/(tp+fn);
-    
-    F1 = (2*prec*reca)/(prec+reca);
+    fn = sum(pred==0 & 
+
+
+
+
+
 
 
     % =============================================================
